@@ -2,6 +2,7 @@ package pl.sda;
 
 import lombok.Data;
 import pl.sda.uri.MovieInfoURIGenerator;
+import pl.sda.view.domain.PutMovieTitleToSearchForFromConsole;
 
 import java.io.IOException;
 import java.net.URI;
@@ -14,18 +15,13 @@ import java.util.Scanner;
 @Data
 public class APIClient {
 
-    private MovieInfoURIGenerator uri;
     private Scanner scanner;
 
-    public APIClient(MovieInfoURIGenerator uri, Scanner scanner) {
-        this.uri = uri;
-        this.scanner = scanner;
-    }
-
-    public void clientAPI(MovieInfoURIGenerator uri) throws IOException, InterruptedException, URISyntaxException {
+    public void clientAPI(String movieTitle) throws IOException, InterruptedException, URISyntaxException {
+       MovieInfoURIGenerator uri = new MovieInfoURIGenerator();
         HttpRequest request = HttpRequest.newBuilder()
                 .GET()
-                .uri(URI.create(scanner.nextLine()))
+                .uri(uri.getByMovieTitle(movieTitle))
                 .build();
         HttpClient client = HttpClient.newHttpClient();
         HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
