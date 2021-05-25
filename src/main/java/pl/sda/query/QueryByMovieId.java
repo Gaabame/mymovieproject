@@ -12,6 +12,7 @@ public class QueryByMovieId extends Query{
     private IdParameter id;
 
     public QueryByMovieId() {
+
         parameters = new ArrayList<>();
     }
 

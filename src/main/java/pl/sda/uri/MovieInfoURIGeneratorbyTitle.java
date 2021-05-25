@@ -7,7 +7,7 @@ import pl.sda.query.QueryByMovieTitle;
 import java.net.URI;
 import java.net.URISyntaxException;
 
-public class MovieInfoURIGenerator {
+public class MovieInfoURIGeneratorbyTitle {
     private static final String HOST = "http://www.omdbapi.com/";
     // private static final String SOURCE = "/reviews/search.json";
 
@@ -16,5 +16,4 @@ public class MovieInfoURIGenerator {
         query.addTitle(new TitleParameter(movieTitle));
         return new URI(HOST + query.asString());
     }
-
 }

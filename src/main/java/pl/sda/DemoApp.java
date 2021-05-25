@@ -1,4 +1,5 @@
 package pl.sda;
+import pl.sda.controller.QueryController;
 
 public class DemoApp {
 
@@ -6,5 +7,4 @@ public class DemoApp {
         QueryController queryController = new QueryController();
         queryController.start();
     }
-
 }

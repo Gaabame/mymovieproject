@@ -6,6 +6,7 @@ import pl.sda.parameter.TitleParameter;
 import java.util.ArrayList;
 
 public class QueryByMovieTitle extends Query {
+
     @NonNull
     private TitleParameter title;
 

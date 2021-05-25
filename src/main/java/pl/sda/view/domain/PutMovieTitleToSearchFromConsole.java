@@ -2,10 +2,10 @@ package pl.sda.view.domain;
 
 import java.util.Scanner;
 
-public class PutMovieTitleToSearchForFromConsole {
+public class PutMovieTitleToSearchFromConsole {
     private final Scanner scanner;
 
-    public PutMovieTitleToSearchForFromConsole(Scanner scanner) {
+    public PutMovieTitleToSearchFromConsole(Scanner scanner) {
         this.scanner = scanner;
     }
 
@@ -13,5 +13,4 @@ public class PutMovieTitleToSearchForFromConsole {
         System.out.println("Wpisz tytuł filmu");
         return scanner.nextLine();
     }
-
 }
