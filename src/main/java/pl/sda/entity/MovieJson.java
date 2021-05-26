@@ -19,6 +19,7 @@ public class MovieJson {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
+    @Column(unique = true)
     @JsonProperty("Title")
     private String title;
     @JsonProperty("Year")

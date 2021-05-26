@@ -29,5 +29,4 @@ public class JsonToJavaService {
         MovieJson movieJson = mapper.readValue(body, MovieJson.class);
         return movieJson;
     }
-
 }

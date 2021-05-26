@@ -1,9 +1,5 @@
 package pl.sda.controller;
 
-import pl.sda.entity.MovieJson;
-import pl.sda.repository.MovieJsonRepo;
-import pl.sda.http.Response;
-import pl.sda.mymovies_sql.MyMovies;
 import pl.sda.service.AppServiceJpa;
 import pl.sda.view.core.ConsoleLooper;
 import pl.sda.view.core.ConsoleView;
@@ -13,7 +9,6 @@ import pl.sda.view.domain.PutMovieIdToSearchFromConsole;
 import pl.sda.view.domain.PutMovieTitleToSearchFromConsole;
 import pl.sda.view.domain.SaveSearchedMovietoDataBase;
 
-import java.net.http.HttpResponse;
 import java.util.Locale;
 import java.util.Scanner;
 

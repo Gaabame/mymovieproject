@@ -1,18 +1,15 @@
-package pl.sda.mymovies_sql;
-
-import pl.sda.repository.MovieJsonRepo;
+package pl.sda.factory;
 
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
-public class MyMovies {
+public class Factory {
 
     public static final String MYMOVIES = "mymovies";
 
-    public MovieJsonRepo getfactory() {
+    public EntityManagerFactory getfactory() {
         EntityManagerFactory factory = Persistence.createEntityManagerFactory(MYMOVIES);
-        MovieJsonRepo movieJsonRepo = new MovieJsonRepo(factory);
-        return movieJsonRepo;
+        return factory;
     }
 
 
