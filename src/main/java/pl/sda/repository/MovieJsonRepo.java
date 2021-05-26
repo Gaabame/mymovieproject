@@ -2,8 +2,6 @@ package pl.sda.repository;
 
 
 import pl.sda.entity.MovieJson;
-import pl.sda.repository.Repository;
-
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import java.util.List;
@@ -12,11 +10,9 @@ import java.util.List;
 public class MovieJsonRepo implements Repository {
 
     private final EntityManagerFactory factory;
-
     public MovieJsonRepo(EntityManagerFactory factory) {
         this.factory = factory;
     }
-
     private EntityManager manager(){
         return factory.createEntityManager();
     }
@@ -72,5 +68,4 @@ public class MovieJsonRepo implements Repository {
         em.close();
         return movieJsons;
     }
-
 }

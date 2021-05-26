@@ -1,4 +1,4 @@
-package pl.sda.json;
+package pl.sda.service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import pl.sda.entity.MovieJson;

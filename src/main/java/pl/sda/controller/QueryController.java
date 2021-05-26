@@ -1,8 +1,8 @@
 package pl.sda.controller;
 
+import pl.sda.entity.MovieJson;
 import pl.sda.repository.MovieJsonRepo;
 import pl.sda.http.Response;
-import pl.sda.json.JsonToJava;
 import pl.sda.mymovies_sql.MyMovies;
 import pl.sda.service.AppServiceJpa;
 import pl.sda.view.core.ConsoleLooper;
@@ -11,9 +11,8 @@ import pl.sda.view.core.Menu;
 import pl.sda.view.core.MenuItem;
 import pl.sda.view.domain.PutMovieIdToSearchFromConsole;
 import pl.sda.view.domain.PutMovieTitleToSearchFromConsole;
+import pl.sda.view.domain.SaveSearchedMovietoDataBase;
 
-import java.io.IOException;
-import java.net.URISyntaxException;
 import java.net.http.HttpResponse;
 import java.util.Locale;
 import java.util.Scanner;
@@ -35,34 +34,9 @@ public class QueryController {
                             PutMovieTitleToSearchFromConsole movieTitle = new PutMovieTitleToSearchFromConsole(input);
                             String searchedMovieTitle = movieTitle.putSearchedMovieTitle(); //String
                             System.out.println("Szukany film: " + searchedMovieTitle.toUpperCase(Locale.ROOT));
-                            try {
-                                service.sendRequestViaTitle(searchedMovieTitle);
-                            } catch (URISyntaxException e) {
-                                e.printStackTrace();
-                            } catch (IOException e) {
-                                e.printStackTrace();
-                            } catch (InterruptedException e) {
-                                e.printStackTrace();
-                            }
-                            System.out.println("Czy chcesz zapisać film do bazy danych? T/N");
-                            if (input.nextLine().toUpperCase(Locale.ROOT).equals("T")){
-                                Response response = new Response();
-                                HttpResponse<String> responseByTitle = null;
-                                try {
-                                    responseByTitle = response.getResponseByTitle(searchedMovieTitle);
-                                } catch (URISyntaxException e) {
-                                    e.printStackTrace();
-                                } catch (IOException e) {
-                                    e.printStackTrace();
-                                } catch (InterruptedException e) {
-                                    e.printStackTrace();
-                                }
-                                String body = responseByTitle.body();
-//                                MovieJson buildJson = MovieJson.builder().country("USA").title("Blade Runner").year("1982").build();
-                                MyMovies myMovies = new MyMovies();
-                                MovieJsonRepo movieJsonRepo = myMovies.getfactory();
-                                movieJsonRepo.save(body);
-                            }
+                            service.sendRequestViaTitle(searchedMovieTitle);
+                            SaveSearchedMovietoDataBase saveSearchedMovietoDataBase = new SaveSearchedMovietoDataBase();
+                            saveSearchedMovietoDataBase.saveSearchedMovie(input,searchedMovieTitle);
                         }));
         menu.addMenuItem(
                 new MenuItem("Wyświetl info o filmie poprzez id",
@@ -70,100 +44,37 @@ public class QueryController {
                             PutMovieIdToSearchFromConsole id = new PutMovieIdToSearchFromConsole(input);
                             String searchedMovieId = id.putSearchedMovieId();//String
                             System.out.println("Szukany film: " + searchedMovieId);
-                            try {
-                                service.sendRequestViaId(searchedMovieId);
-                            } catch (URISyntaxException e) {
-                                e.printStackTrace();
-                            } catch (IOException e) {
-                                e.printStackTrace();
-                            } catch (InterruptedException e) {
-                                e.printStackTrace();
-                            }
+                            service.sendRequestViaId(searchedMovieId);
                         }));
-
         menu.addMenuItem(
                 new MenuItem("Wyświetl aktorów filmu",
                         () -> {
-                            JsonToJava jsonToJava = new JsonToJava();
-                            try {
-                                jsonToJava.showActors(input);
-                            } catch (URISyntaxException e) {
-                                e.printStackTrace();
-                            } catch (IOException e) {
-                                e.printStackTrace();
-                            } catch (InterruptedException e) {
-                                e.printStackTrace();
-                            }
+                            service.showActors(input);
                         }));
         menu.addMenuItem(
                 new MenuItem("Wyświetl rok produkcji filmu",
                         () -> {
-                            JsonToJava jsonToJava = new JsonToJava();
-                            try {
-                                jsonToJava.showYear(input);
-                            } catch (URISyntaxException e) {
-                                e.printStackTrace();
-                            } catch (IOException e) {
-                                e.printStackTrace();
-                            } catch (InterruptedException e) {
-                                e.printStackTrace();
-                            }
+                            service.showYear(input);
                         }));
         menu.addMenuItem(
                 new MenuItem("Wyświetl BoxOffice",
                         () -> {
-                            JsonToJava jsonToJava = new JsonToJava();
-                            try {
-                                jsonToJava.showBoxOffice(input);
-                            } catch (URISyntaxException e) {
-                                e.printStackTrace();
-                            } catch (IOException e) {
-                                e.printStackTrace();
-                            } catch (InterruptedException e) {
-                                e.printStackTrace();
-                            }
+                            service.showBoxOffice(input);
                         }));
         menu.addMenuItem(
                 new MenuItem("Wyświetl reżysera",
                         () -> {
-                            JsonToJava jsonToJava = new JsonToJava();
-                            try {
-                                jsonToJava.showDirector(input);
-                            } catch (URISyntaxException e) {
-                                e.printStackTrace();
-                            } catch (IOException e) {
-                                e.printStackTrace();
-                            } catch (InterruptedException e) {
-                                e.printStackTrace();
-                            }
+                            service.showDirector(input);
                         }));
         menu.addMenuItem(
                 new MenuItem("Wyświetl nagrody",
                         () -> {
-                            JsonToJava jsonToJava = new JsonToJava();
-                            try {
-                                jsonToJava.showAwards(input);
-                            } catch (URISyntaxException e) {
-                                e.printStackTrace();
-                            } catch (IOException e) {
-                                e.printStackTrace();
-                            } catch (InterruptedException e) {
-                                e.printStackTrace();
-                            }
+                            service.showAwards(input);
                         }));
         menu.addMenuItem(
                 new MenuItem("Wyświetl Imdb id",
                         () -> {
-                            JsonToJava jsonToJava = new JsonToJava();
-                            try {
-                                jsonToJava.showImdbId(input);
-                            } catch (URISyntaxException e) {
-                                e.printStackTrace();
-                            } catch (IOException e) {
-                                e.printStackTrace();
-                            } catch (InterruptedException e) {
-                                e.printStackTrace();
-                            }
+                            service.showImdbId(input);
                         }));
         menu.addMenuItem(new MenuItem(
                 "Zakończ",
@@ -176,14 +87,5 @@ public class QueryController {
     }
 }
 
-
-//        MovieInfoURIGenerator generator = new MovieInfoURIGenerator();
-//        try {
-//            URI blade_runner = generator.getByMovieTitle("blade runner");
-//            System.out.println(blade_runner);
-//        } catch (URISyntaxException e) {
-//            e.printStackTrace();
-//        }
-//    }
 
 
