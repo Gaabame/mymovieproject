@@ -3,6 +3,7 @@ package pl.sda.controller;
 import pl.sda.entitymanager.MovieJsonRepo;
 import pl.sda.json.JsonToJava;
 import pl.sda.entity.MovieJson;
+import pl.sda.mymovies_sql.MyMovies;
 import pl.sda.service.AppServiceJpa;
 import pl.sda.view.core.ConsoleLooper;
 import pl.sda.view.core.ConsoleView;
@@ -47,8 +48,8 @@ public class QueryController {
                             System.out.println("Czy chcesz zapisać film do bazy danych? T/N");
                             if (input.nextLine().toUpperCase(Locale.ROOT).equals("T")){
                                 MovieJson buildJson = MovieJson.builder().country("USA").title("Blade Runner").year("1982").build();
-                                EntityManagerFactory factory = Persistence.createEntityManagerFactory("mymovies");
-                                MovieJsonRepo movieJsonRepo = new MovieJsonRepo(factory);
+                                MyMovies myMovies = new MyMovies();
+                                MovieJsonRepo movieJsonRepo = myMovies.getfactory();
                                 movieJsonRepo.save(buildJson);
 
                             }
