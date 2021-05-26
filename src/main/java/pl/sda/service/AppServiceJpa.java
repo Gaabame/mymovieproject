@@ -74,7 +74,7 @@ public class AppServiceJpa implements AppService {
 
     @Override
     public void showActors(Scanner scanner){
-            JsonToJavaService service = new JsonToJavaService();
+            SearchService service = new SearchService();
         MovieJson movieJson = null;
         try {
             movieJson = service.searchBy(scanner);
@@ -90,7 +90,7 @@ public class AppServiceJpa implements AppService {
 
     @Override
     public void showYear(Scanner scanner) {
-        JsonToJavaService service = new JsonToJavaService();
+        SearchService service = new SearchService();
         MovieJson movieJson = null;
         try {
             movieJson = service.searchBy(scanner);
@@ -106,7 +106,7 @@ public class AppServiceJpa implements AppService {
 
     @Override
     public void showAwards(Scanner scanner) {
-        JsonToJavaService service = new JsonToJavaService();
+        SearchService service = new SearchService();
         MovieJson movieJson = null;
         try {
             movieJson = service.searchBy(scanner);
@@ -122,7 +122,7 @@ public class AppServiceJpa implements AppService {
 
     @Override
     public void showDirector(Scanner scanner) {
-        JsonToJavaService service = new JsonToJavaService();
+        SearchService service = new SearchService();
         MovieJson movieJson = null;
         try {
             movieJson = service.searchBy(scanner);
@@ -138,7 +138,7 @@ public class AppServiceJpa implements AppService {
 
     @Override
     public void showWriter(Scanner scanner) {
-        JsonToJavaService service = new JsonToJavaService();
+        SearchService service = new SearchService();
         MovieJson movieJson = null;
         try {
             movieJson = service.searchBy(scanner);
@@ -154,7 +154,7 @@ public class AppServiceJpa implements AppService {
 
     @Override
     public void getCountry(Scanner scanner) {
-        JsonToJavaService service = new JsonToJavaService();
+        SearchService service = new SearchService();
         MovieJson movieJson = null;
         try {
             movieJson = service.searchBy(scanner);
@@ -170,7 +170,7 @@ public class AppServiceJpa implements AppService {
 
     @Override
     public void showImdbRating(Scanner scanner) {
-        JsonToJavaService service = new JsonToJavaService();
+        SearchService service = new SearchService();
         MovieJson movieJson = null;
         try {
             movieJson = service.searchBy(scanner);
@@ -186,7 +186,7 @@ public class AppServiceJpa implements AppService {
 
     @Override
     public void showBoxOffice(Scanner scanner) {
-        JsonToJavaService service = new JsonToJavaService();
+        SearchService service = new SearchService();
         MovieJson movieJson = null;
         try {
             movieJson = service.searchBy(scanner);
@@ -202,7 +202,7 @@ public class AppServiceJpa implements AppService {
 
     @Override
     public void showGenre(Scanner scanner) {
-        JsonToJavaService service = new JsonToJavaService();
+        SearchService service = new SearchService();
         MovieJson movieJson = null;
         try {
             movieJson = service.searchBy(scanner);
@@ -218,7 +218,7 @@ public class AppServiceJpa implements AppService {
 
     @Override
     public void showImdbVotes(Scanner scanner) {
-        JsonToJavaService service = new JsonToJavaService();
+        SearchService service = new SearchService();
         MovieJson movieJson = null;
         try {
             movieJson = service.searchBy(scanner);
@@ -234,7 +234,7 @@ public class AppServiceJpa implements AppService {
 
     @Override
     public void showLanguage(Scanner scanner) {
-        JsonToJavaService service = new JsonToJavaService();
+        SearchService service = new SearchService();
         MovieJson movieJson = null;
         try {
             movieJson = service.searchBy(scanner);
@@ -250,7 +250,7 @@ public class AppServiceJpa implements AppService {
 
     @Override
     public void showPlot(Scanner scanner) {
-        JsonToJavaService service = new JsonToJavaService();
+        SearchService service = new SearchService();
         MovieJson movieJson = null;
         try {
             movieJson = service.searchBy(scanner);
@@ -266,7 +266,7 @@ public class AppServiceJpa implements AppService {
 
     @Override
     public void showWebsite(Scanner scanner) {
-        JsonToJavaService service = new JsonToJavaService();
+        SearchService service = new SearchService();
         MovieJson movieJson = null;
         try {
             movieJson = service.searchBy(scanner);
@@ -282,7 +282,7 @@ public class AppServiceJpa implements AppService {
 
     @Override
     public void showImdbId(Scanner scanner) {
-        JsonToJavaService service = new JsonToJavaService();
+        SearchService service = new SearchService();
         MovieJson movieJson = null;
         try {
             movieJson = service.searchBy(scanner);
@@ -298,7 +298,7 @@ public class AppServiceJpa implements AppService {
 
     @Override
     public void showMovieDuration(Scanner scanner) {
-        JsonToJavaService service = new JsonToJavaService();
+        SearchService service = new SearchService();
         MovieJson movieJson = null;
         try {
             movieJson = service.searchBy(scanner);
@@ -314,7 +314,7 @@ public class AppServiceJpa implements AppService {
 
     @Override
     public void showReleasedYear(Scanner scanner) {
-        JsonToJavaService service = new JsonToJavaService();
+        SearchService service = new SearchService();
         MovieJson movieJson = null;
         try {
             movieJson = service.searchBy(scanner);

@@ -14,7 +14,7 @@ import java.net.http.HttpResponse;
 import java.util.Locale;
 import java.util.Scanner;
 
-public class JsonToJavaService {
+public class SearchService {
 
     public MovieJson searchBy(Scanner scanner) throws URISyntaxException, IOException, InterruptedException {
         PutMovieTitleToSearchFromConsole movieTitle = new PutMovieTitleToSearchFromConsole(scanner);
