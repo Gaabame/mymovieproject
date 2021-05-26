@@ -7,6 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Data
@@ -15,6 +16,7 @@ import javax.persistence.*;
 @Builder
 //@Table (name = "mymovies")
 public class MovieJson {
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
@@ -48,8 +50,9 @@ public class MovieJson {
     private String awards;
     @JsonProperty("Poster")
     private String poster;
+    @OneToMany (cascade = CascadeType.ALL)
     @JsonProperty("Ratings")
-    private Ratings[] ratings;
+    private List<Ratings> ratings;
     @JsonProperty("Metascore")
     private String metascore;
     @JsonProperty("imdbRating")

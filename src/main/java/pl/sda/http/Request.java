@@ -17,21 +17,31 @@ public class Request {
     private String id;
     private String title;
 
-    public HttpRequest getRequestById(String id) throws URISyntaxException {
+    public HttpRequest getRequestById(String id) {
         MovieInfoURIGeneratorbyId uri = new MovieInfoURIGeneratorbyId();
-        HttpRequest request = HttpRequest.newBuilder()
-                .GET()
-                .uri(uri.getbyMovieId(id))
-                .build();
+        HttpRequest request = null;
+        try {
+            request = HttpRequest.newBuilder()
+                    .GET()
+                    .uri(uri.getbyMovieId(id))
+                    .build();
+        } catch (URISyntaxException e) {
+            e.printStackTrace();
+        }
         return request;
     }
 
-    public HttpRequest getRequestByTitle(String title) throws URISyntaxException {
+    public HttpRequest getRequestByTitle(String title){
         MovieInfoURIGeneratorbyTitle uri = new MovieInfoURIGeneratorbyTitle();
-        HttpRequest request = HttpRequest.newBuilder()
-                .GET()
-                .uri(uri.getByMovieTitle(title))
-                .build();
+        HttpRequest request = null;
+        try {
+            request = HttpRequest.newBuilder()
+                    .GET()
+                    .uri(uri.getByMovieTitle(title))
+                    .build();
+        } catch (URISyntaxException e) {
+            e.printStackTrace();
+        }
         return request;
     }
 }

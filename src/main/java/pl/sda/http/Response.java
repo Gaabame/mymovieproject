@@ -14,11 +14,7 @@ public class Response {
     public HttpResponse<String> getResponseByTitle(String title){
         Request request = new Request();
         HttpRequest requestByTitle = null;
-        try {
-            requestByTitle = request.getRequestByTitle(title);
-        } catch (URISyntaxException e) {
-            e.printStackTrace();
-        }
+        requestByTitle = request.getRequestByTitle(title);
         HttpClient client = HttpClient.newHttpClient();
         HttpResponse<String> response = null;
         try {
@@ -37,11 +33,7 @@ public class Response {
     public HttpResponse<String> getResponseById(String id) {
         Request request = new Request();
         HttpRequest requestById = null;
-        try {
-            requestById = request.getRequestById(id);
-        } catch (URISyntaxException e) {
-            e.printStackTrace();
-        }
+        requestById = request.getRequestById(id);
         HttpClient client = HttpClient.newHttpClient();
         HttpResponse<String> response = null;
         try {
