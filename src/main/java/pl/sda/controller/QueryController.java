@@ -1,6 +1,7 @@
 package pl.sda.controller;
 
 import pl.sda.entitymanager.MovieJsonRepo;
+import pl.sda.http.Response;
 import pl.sda.json.JsonToJava;
 import pl.sda.entity.MovieJson;
 import pl.sda.mymovies_sql.MyMovies;
@@ -16,6 +17,7 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import java.io.IOException;
 import java.net.URISyntaxException;
+import java.net.http.HttpResponse;
 import java.util.Locale;
 import java.util.Scanner;
 
@@ -47,11 +49,22 @@ public class QueryController {
                             }
                             System.out.println("Czy chcesz zapisać film do bazy danych? T/N");
                             if (input.nextLine().toUpperCase(Locale.ROOT).equals("T")){
+                                Response response = new Response();
+                                HttpResponse<String> responseByTitle = null;
+                                try {
+                                    responseByTitle = response.getResponseByTitle(searchedMovieTitle);
+                                } catch (URISyntaxException e) {
+                                    e.printStackTrace();
+                                } catch (IOException e) {
+                                    e.printStackTrace();
+                                } catch (InterruptedException e) {
+                                    e.printStackTrace();
+                                }
+                                String body = responseByTitle.body();
                                 MovieJson buildJson = MovieJson.builder().country("USA").title("Blade Runner").year("1982").build();
                                 MyMovies myMovies = new MyMovies();
                                 MovieJsonRepo movieJsonRepo = myMovies.getfactory();
-                                movieJsonRepo.save(buildJson);
-
+                                movieJsonRepo.save(body);
                             }
                         }));
         menu.addMenuItem(
