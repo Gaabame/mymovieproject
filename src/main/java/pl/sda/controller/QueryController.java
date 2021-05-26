@@ -1,9 +1,8 @@
 package pl.sda.controller;
 
-import pl.sda.entitymanager.MovieJsonRepo;
+import pl.sda.repository.MovieJsonRepo;
 import pl.sda.http.Response;
 import pl.sda.json.JsonToJava;
-import pl.sda.entity.MovieJson;
 import pl.sda.mymovies_sql.MyMovies;
 import pl.sda.service.AppServiceJpa;
 import pl.sda.view.core.ConsoleLooper;
@@ -13,8 +12,6 @@ import pl.sda.view.core.MenuItem;
 import pl.sda.view.domain.PutMovieIdToSearchFromConsole;
 import pl.sda.view.domain.PutMovieTitleToSearchFromConsole;
 
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.net.http.HttpResponse;
@@ -61,7 +58,7 @@ public class QueryController {
                                     e.printStackTrace();
                                 }
                                 String body = responseByTitle.body();
-                                MovieJson buildJson = MovieJson.builder().country("USA").title("Blade Runner").year("1982").build();
+//                                MovieJson buildJson = MovieJson.builder().country("USA").title("Blade Runner").year("1982").build();
                                 MyMovies myMovies = new MyMovies();
                                 MovieJsonRepo movieJsonRepo = myMovies.getfactory();
                                 movieJsonRepo.save(body);
