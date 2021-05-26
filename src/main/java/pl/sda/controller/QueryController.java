@@ -2,7 +2,7 @@ package pl.sda.controller;
 
 import pl.sda.entitymanager.MovieJsonRepo;
 import pl.sda.json.JsonToJava;
-import pl.sda.json.MovieJson;
+import pl.sda.entity.MovieJson;
 import pl.sda.service.AppServiceJpa;
 import pl.sda.view.core.ConsoleLooper;
 import pl.sda.view.core.ConsoleView;
@@ -11,7 +11,6 @@ import pl.sda.view.core.MenuItem;
 import pl.sda.view.domain.PutMovieIdToSearchFromConsole;
 import pl.sda.view.domain.PutMovieTitleToSearchFromConsole;
 
-import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import java.io.IOException;
@@ -77,6 +76,76 @@ public class QueryController {
                             JsonToJava jsonToJava = new JsonToJava();
                             try {
                                 jsonToJava.showActors(input);
+                            } catch (URISyntaxException e) {
+                                e.printStackTrace();
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            } catch (InterruptedException e) {
+                                e.printStackTrace();
+                            }
+                        }));
+        menu.addMenuItem(
+                new MenuItem("Wyświetl rok produkcji filmu",
+                        () -> {
+                            JsonToJava jsonToJava = new JsonToJava();
+                            try {
+                                jsonToJava.showYear(input);
+                            } catch (URISyntaxException e) {
+                                e.printStackTrace();
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            } catch (InterruptedException e) {
+                                e.printStackTrace();
+                            }
+                        }));
+        menu.addMenuItem(
+                new MenuItem("Wyświetl BoxOffice",
+                        () -> {
+                            JsonToJava jsonToJava = new JsonToJava();
+                            try {
+                                jsonToJava.showBoxOffice(input);
+                            } catch (URISyntaxException e) {
+                                e.printStackTrace();
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            } catch (InterruptedException e) {
+                                e.printStackTrace();
+                            }
+                        }));
+        menu.addMenuItem(
+                new MenuItem("Wyświetl reżysera",
+                        () -> {
+                            JsonToJava jsonToJava = new JsonToJava();
+                            try {
+                                jsonToJava.showDirector(input);
+                            } catch (URISyntaxException e) {
+                                e.printStackTrace();
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            } catch (InterruptedException e) {
+                                e.printStackTrace();
+                            }
+                        }));
+        menu.addMenuItem(
+                new MenuItem("Wyświetl nagrody",
+                        () -> {
+                            JsonToJava jsonToJava = new JsonToJava();
+                            try {
+                                jsonToJava.showAwards(input);
+                            } catch (URISyntaxException e) {
+                                e.printStackTrace();
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            } catch (InterruptedException e) {
+                                e.printStackTrace();
+                            }
+                        }));
+        menu.addMenuItem(
+                new MenuItem("Wyświetl Imdb id",
+                        () -> {
+                            JsonToJava jsonToJava = new JsonToJava();
+                            try {
+                                jsonToJava.showImdbId(input);
                             } catch (URISyntaxException e) {
                                 e.printStackTrace();
                             } catch (IOException e) {

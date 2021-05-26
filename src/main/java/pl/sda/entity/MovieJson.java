@@ -1,6 +1,5 @@
-package pl.sda.json;
+package pl.sda.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -11,9 +10,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import java.lang.reflect.Array;
-import java.util.List;
-import java.util.Optional;
 
 @Entity
 @Data
