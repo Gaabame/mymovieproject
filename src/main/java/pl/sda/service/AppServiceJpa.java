@@ -3,27 +3,22 @@ package pl.sda.service;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import pl.sda.entity.MovieJson;
-import pl.sda.http.Request;
-import pl.sda.http.Response;
-
-
-import java.io.IOException;
-import java.net.URISyntaxException;
-import java.util.Scanner;
+import pl.sda.repositoryAp.JpaRepositoryApi;
+import java.net.http.HttpResponse;
 
 public class AppServiceJpa implements AppService {
 
+    JpaRepositoryApi repo = new JpaRepositoryApi();
 
     @Override
     public MovieJson getMovieById(String id) {
-        Request request = new Request();
-        request.getRequestById(id);
-        Response response = new Response();
-        if (response.getResponseById(id).statusCode() == 200) {
+        repo.sendRequestById(id);
+        HttpResponse<String> responseById = repo.getResponseById(id);
+        if (responseById.statusCode() == 200) {
             ObjectMapper mapper = new ObjectMapper();
-            System.out.println(response.getResponseById(id).body());
+            System.out.println(responseById.body());
             try {
-                return mapper.readValue(response.getResponseById(id).body(), MovieJson.class);
+                return mapper.readValue(responseById.body(), MovieJson.class);
             } catch (JsonProcessingException e) {
                 System.err.println(e.getMessage());
                 return null;
@@ -36,14 +31,13 @@ public class AppServiceJpa implements AppService {
 
     @Override
     public MovieJson getMovieByTitle(String title) {
-        Request request = new Request();
-        request.getRequestByTitle(title);
-        Response response = new Response();
-        if (response.getResponseByTitle(title).statusCode() == 200) {
+        repo.sendRequestByTitle(title);
+        HttpResponse<String> responseByTitle = repo.getResponseByTitle(title);
+        if (responseByTitle.statusCode() == 200) {
             ObjectMapper mapper = new ObjectMapper();
-            System.out.println(response.getResponseByTitle(title).body());
+            System.out.println(responseByTitle.body());
             try {
-                return mapper.readValue(response.getResponseByTitle(title).body(), MovieJson.class);
+                return mapper.readValue(responseByTitle.body(), MovieJson.class);
             } catch (JsonProcessingException e) {
                 System.err.println(e.getMessage());
                 return null;
@@ -54,262 +48,8 @@ public class AppServiceJpa implements AppService {
         return null;
     }
 
-
     @Override
-    public void showActors(Scanner input) {
-        SearchService service = new SearchService();
-        MovieJson movieJson = null;
-        try {
-            movieJson = service.searchBy(input);
-        } catch (URISyntaxException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        System.out.println(movieJson.getActors());
+    public void showActors(String title) {
+        System.out.println(repo.findByTitle(title).getActors());
     }
-
-//    @Override
-//    public void showYear(Scanner scanner) {
-//        SearchService service = new SearchService();
-//        MovieJson movieJson = null;
-//        try {
-//            movieJson = service.searchBy(scanner);
-//        } catch (URISyntaxException e) {
-//            e.printStackTrace();
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        } catch (InterruptedException e) {
-//            e.printStackTrace();
-//        }
-//        System.out.println(movieJson.getYear());
-//    }
-//
-//    @Override
-//    public void showAwards(Scanner scanner) {
-//        SearchService service = new SearchService();
-//        MovieJson movieJson = null;
-//        try {
-//            movieJson = service.searchBy(scanner);
-//        } catch (URISyntaxException e) {
-//            e.printStackTrace();
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        } catch (InterruptedException e) {
-//            e.printStackTrace();
-//        }
-//        System.out.println(movieJson.getAwards());
-//    }
-//
-//    @Override
-//    public void showDirector(Scanner scanner) {
-//        SearchService service = new SearchService();
-//        MovieJson movieJson = null;
-//        try {
-//            movieJson = service.searchBy(scanner);
-//        } catch (URISyntaxException e) {
-//            e.printStackTrace();
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        } catch (InterruptedException e) {
-//            e.printStackTrace();
-//        }
-//        System.out.println(movieJson.getDirector());
-//    }
-//
-//    @Override
-//    public void showWriter(Scanner scanner) {
-//        SearchService service = new SearchService();
-//        MovieJson movieJson = null;
-//        try {
-//            movieJson = service.searchBy(scanner);
-//        } catch (URISyntaxException e) {
-//            e.printStackTrace();
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        } catch (InterruptedException e) {
-//            e.printStackTrace();
-//        }
-//        System.out.println(movieJson.getWriter());
-//    }
-//
-//    @Override
-//    public void getCountry(Scanner scanner) {
-//        SearchService service = new SearchService();
-//        MovieJson movieJson = null;
-//        try {
-//            movieJson = service.searchBy(scanner);
-//        } catch (URISyntaxException e) {
-//            e.printStackTrace();
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        } catch (InterruptedException e) {
-//            e.printStackTrace();
-//        }
-//        System.out.println(movieJson.getCountry());
-//    }
-//
-//    @Override
-//    public void showImdbRating(Scanner scanner) {
-//        SearchService service = new SearchService();
-//        MovieJson movieJson = null;
-//        try {
-//            movieJson = service.searchBy(scanner);
-//        } catch (URISyntaxException e) {
-//            e.printStackTrace();
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        } catch (InterruptedException e) {
-//            e.printStackTrace();
-//        }
-//        System.out.println(movieJson.getImdbRating());
-//    }
-//
-//    @Override
-//    public void showBoxOffice(Scanner scanner) {
-//        SearchService service = new SearchService();
-//        MovieJson movieJson = null;
-//        try {
-//            movieJson = service.searchBy(scanner);
-//        } catch (URISyntaxException e) {
-//            e.printStackTrace();
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        } catch (InterruptedException e) {
-//            e.printStackTrace();
-//        }
-//        System.out.println(movieJson.getBoxOffice());
-//    }
-//
-//    @Override
-//    public void showGenre(Scanner scanner) {
-//        SearchService service = new SearchService();
-//        MovieJson movieJson = null;
-//        try {
-//            movieJson = service.searchBy(scanner);
-//        } catch (URISyntaxException e) {
-//            e.printStackTrace();
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        } catch (InterruptedException e) {
-//            e.printStackTrace();
-//        }
-//        System.out.println(movieJson.getGenre());
-//    }
-//
-//    @Override
-//    public void showImdbVotes(Scanner scanner) {
-//        SearchService service = new SearchService();
-//        MovieJson movieJson = null;
-//        try {
-//            movieJson = service.searchBy(scanner);
-//        } catch (URISyntaxException e) {
-//            e.printStackTrace();
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        } catch (InterruptedException e) {
-//            e.printStackTrace();
-//        }
-//        System.out.println(movieJson.getImdbVotes());
-//    }
-//
-//    @Override
-//    public void showLanguage(Scanner scanner) {
-//        SearchService service = new SearchService();
-//        MovieJson movieJson = null;
-//        try {
-//            movieJson = service.searchBy(scanner);
-//        } catch (URISyntaxException e) {
-//            e.printStackTrace();
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        } catch (InterruptedException e) {
-//            e.printStackTrace();
-//        }
-//        System.out.println(movieJson.getLanguage());
-//    }
-//
-//    @Override
-//    public void showPlot(Scanner scanner) {
-//        SearchService service = new SearchService();
-//        MovieJson movieJson = null;
-//        try {
-//            movieJson = service.searchBy(scanner);
-//        } catch (URISyntaxException e) {
-//            e.printStackTrace();
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        } catch (InterruptedException e) {
-//            e.printStackTrace();
-//        }
-//        System.out.println(movieJson.getPlot());
-//    }
-//
-//    @Override
-//    public void showWebsite(Scanner scanner) {
-//        SearchService service = new SearchService();
-//        MovieJson movieJson = null;
-//        try {
-//            movieJson = service.searchBy(scanner);
-//        } catch (URISyntaxException e) {
-//            e.printStackTrace();
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        } catch (InterruptedException e) {
-//            e.printStackTrace();
-//        }
-//        System.out.println(movieJson.getWebsite());
-//    }
-//
-//    @Override
-//    public void showImdbId(Scanner scanner) {
-//        SearchService service = new SearchService();
-//        MovieJson movieJson = null;
-//        try {
-//            movieJson = service.searchBy(scanner);
-//        } catch (URISyntaxException e) {
-//            e.printStackTrace();
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        } catch (InterruptedException e) {
-//            e.printStackTrace();
-//        }
-//        System.out.println(movieJson.getImdbID());
-//    }
-//
-//    @Override
-//    public void showMovieDuration(Scanner scanner) {
-//        SearchService service = new SearchService();
-//        MovieJson movieJson = null;
-//        try {
-//            movieJson = service.searchBy(scanner);
-//        } catch (URISyntaxException e) {
-//            e.printStackTrace();
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        } catch (InterruptedException e) {
-//            e.printStackTrace();
-//        }
-//        System.out.println(movieJson.getRuntime());
-//    }
-//
-//    @Override
-//    public void showReleasedYear(Scanner scanner) {
-//        SearchService service = new SearchService();
-//        MovieJson movieJson = null;
-//        try {
-//            movieJson = service.searchBy(scanner);
-//        } catch (URISyntaxException e) {
-//            e.printStackTrace();
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        } catch (InterruptedException e) {
-//            e.printStackTrace();
-//        }
-//        System.out.println(movieJson.getReleased());
-//    }
-//}
-//
 }

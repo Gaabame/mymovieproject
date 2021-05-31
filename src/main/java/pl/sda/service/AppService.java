@@ -1,14 +1,11 @@
 package pl.sda.service;
 
 import pl.sda.entity.MovieJson;
-
-import java.util.Scanner;
-
 public interface AppService {
 
     MovieJson getMovieByTitle(String title);
     MovieJson getMovieById(String id);
-    void showActors(Scanner scanner);
+    void showActors(String title);
 //    void showYear(Scanner scanner);
 //    void showAwards(Scanner scanner);
 //    void showDirector(Scanner scanner);

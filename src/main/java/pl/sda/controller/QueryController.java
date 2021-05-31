@@ -1,5 +1,6 @@
 package pl.sda.controller;
 
+import pl.sda.entity.MovieJson;
 import pl.sda.service.AppServiceJpa;
 import pl.sda.service.MyBaseServiceJpa;
 import pl.sda.view.core.ConsoleLooper;
@@ -28,7 +29,12 @@ public class QueryController {
                             PutMovieTitleToSearchFromConsole movieTitle = new PutMovieTitleToSearchFromConsole(input);
                             String searchedMovieTitle = movieTitle.putSearchedMovieTitle(); //String
                             System.out.println("Szukany film: " + searchedMovieTitle.toUpperCase(Locale.ROOT));
-                            service.getMovieByTitle(searchedMovieTitle);
+                            MovieJson movie = service.getMovieByTitle(searchedMovieTitle);
+                            System.out.println("Czy chcesz zapisac film do bazy? T/N");
+                            if(input.nextLine().toUpperCase(Locale.ROOT).equals("T")) {
+                                myBaseService.saveMovieIntoBase(movie);
+                            }
+
 
                         }));
         menu.addMenuItem(
@@ -37,7 +43,7 @@ public class QueryController {
                             PutMovieIdToSearchFromConsole id = new PutMovieIdToSearchFromConsole(input);
                             String searchedMovieId = id.putSearchedMovieId();//String
                             System.out.println("Szukany film: " + searchedMovieId);
-                            service.getMovieById(searchedMovieId);
+                            MovieJson movieById = service.getMovieById(searchedMovieId);
 
 
                         }));
@@ -74,7 +80,9 @@ public class QueryController {
         menu.addMenuItem(
                 new MenuItem("Wyświetl aktorów",
                         () -> {
-                            service.showActors(input);
+                            PutMovieTitleToSearchFromConsole movieTitle = new PutMovieTitleToSearchFromConsole(input);
+                            String searchedMovieTitle = movieTitle.putSearchedMovieTitle();
+                            service.showActors(searchedMovieTitle);
                         }));
         menu.addMenuItem(new MenuItem(
                 "Zakończ",
