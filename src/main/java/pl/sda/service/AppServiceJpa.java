@@ -52,4 +52,19 @@ public class AppServiceJpa implements AppService {
     public void showActors(String title) {
         System.out.println(repo.findByTitle(title).getActors());
     }
+
+    @Override
+    public void showBoxOffice(String title) {
+        System.out.println(repo.findByTitle(title).getBoxOffice());
+    }
+
+    @Override
+    public void showImdbId(String title) {
+        System.out.println(repo.findByTitle(title).getImdbID());
+    }
+
+    @Override
+    public void showDirector(String title) {
+        System.out.println(repo.findByTitle(title).getDirector());
+    }
 }

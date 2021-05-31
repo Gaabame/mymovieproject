@@ -10,9 +10,14 @@ public class PutMovieIdToSearchFromConsole {
         this.scanner = scanner;
     }
 
-    public String putSearchedMovieId(){
+    public String putSearchedMovieImdbId(){
         System.out.println("Wpisz id filmu");
         return scanner.nextLine();
+    }
+
+    public Long putSearchedMovieIdFromBase(){
+        System.out.println("Wpisz id filmu");
+        return scanner.nextLong();
     }
 }
 
