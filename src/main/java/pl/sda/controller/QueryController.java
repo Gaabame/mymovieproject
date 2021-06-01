@@ -15,12 +15,11 @@ import java.util.Scanner;
 
 public class QueryController {
     private final ConsoleLooper looper;
-    private final ConsoleView view;
     private final Scanner input = new Scanner(System.in);
 
     public QueryController(AppServiceJpa service, MyBaseServiceJpa myBaseService) {
         Menu menu = new Menu();
-        view = new ConsoleView(menu, System.in);
+        ConsoleView view = new ConsoleView(menu, System.in);
         looper = new ConsoleLooper(view);
 
         menu.addMenuItem(
@@ -53,9 +52,7 @@ public class QueryController {
                         }));
         menu.addMenuItem(
                 new MenuItem("Wyświetl filmy zapisane w bazie",
-                        () -> {
-                            myBaseService.printMovieTitlesSavedInMyBase();
-                        }));
+                        () -> myBaseService.printMovieTitlesSavedInMyBase()));
         menu.addMenuItem(
                 new MenuItem("Wyszukaj film zapisany w bazie po tytule",
                         () -> {
@@ -70,13 +67,13 @@ public class QueryController {
                             Long movieIdFromBase = id.putSearchedMovieIdFromBase();
                             myBaseService.findMovieFromBaseById(movieIdFromBase);
                         }));
-        menu.addMenuItem(
-                new MenuItem("Usuń film z bazy",
-                        () -> {
-                            PutMovieIdToSearchFromConsole id = new PutMovieIdToSearchFromConsole(input);
-                            Long movieIdFromBase = id.putSearchedMovieIdFromBase();
-                            myBaseService.deleteMovieFromMyBase(movieIdFromBase);
-                        }));
+//        menu.addMenuItem(
+//                new MenuItem("Usuń film z bazy",
+//                        () -> {
+//                            PutMovieIdToSearchFromConsole id = new PutMovieIdToSearchFromConsole(input);
+//                            Long movieIdFromBase = id.putSearchedMovieIdFromBase();
+//                            myBaseService.deleteMovieFromMyBase(movieIdFromBase);
+//                        }));
         menu.addMenuItem(
                 new MenuItem("Wyświetl BoxOffice filmu",
                         () -> {

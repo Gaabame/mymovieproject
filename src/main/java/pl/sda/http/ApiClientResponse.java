@@ -12,11 +12,10 @@ public class ApiClientResponse {
         HttpResponse<String> response = null;
         try {
             response = client.send(request, HttpResponse.BodyHandlers.ofString());
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (InterruptedException e) {
+        } catch (IOException | InterruptedException e) {
             e.printStackTrace();
         }
+        assert response != null;
         if (response.statusCode() != 200) {
             System.out.println("FAILED");
         }

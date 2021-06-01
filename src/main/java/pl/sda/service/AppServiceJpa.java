@@ -10,10 +10,7 @@ public class AppServiceJpa implements AppService {
 
     JpaRepositoryApi repo = new JpaRepositoryApi();
 
-    @Override
-    public MovieJson getMovieById(String id) {
-        repo.sendRequestById(id);
-        HttpResponse<String> responseById = repo.getResponseById(id);
+    private MovieJson getMovieJson(HttpResponse<String> responseById) {
         if (responseById.statusCode() == 200) {
             ObjectMapper mapper = new ObjectMapper();
             System.out.println(responseById.body());
@@ -30,22 +27,17 @@ public class AppServiceJpa implements AppService {
     }
 
     @Override
+    public MovieJson getMovieById(String id) {
+        repo.sendRequestById(id);
+        HttpResponse responseById = repo.getResponseById(id);
+        return getMovieJson(responseById);
+    }
+
+    @Override
     public MovieJson getMovieByTitle(String title) {
         repo.sendRequestByTitle(title);
-        HttpResponse<String> responseByTitle = repo.getResponseByTitle(title);
-        if (responseByTitle.statusCode() == 200) {
-            ObjectMapper mapper = new ObjectMapper();
-            System.out.println(responseByTitle.body());
-            try {
-                return mapper.readValue(responseByTitle.body(), MovieJson.class);
-            } catch (JsonProcessingException e) {
-                System.err.println(e.getMessage());
-                return null;
-            }
-        } else {
-            System.out.println("FAILED");
-        }
-        return null;
+        HttpResponse responseByTitle = repo.getResponseByTitle(title);
+        return getMovieJson(responseByTitle);
     }
 
     @Override

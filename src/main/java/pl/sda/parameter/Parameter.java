@@ -15,4 +15,3 @@ public abstract class Parameter {
         return name + ASSIGN + valueAsString();
     }
 }
-//http://www.omdbapi.com/?apikey=c26f0a5a&t=blade+runner

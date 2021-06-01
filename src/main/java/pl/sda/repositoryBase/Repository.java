@@ -1,7 +1,5 @@
 package pl.sda.repositoryBase;
 
-import pl.sda.entity.MovieJson;
-
 import java.util.List;
 import java.util.Optional;
 

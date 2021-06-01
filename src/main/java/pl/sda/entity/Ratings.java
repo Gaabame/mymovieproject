@@ -13,8 +13,6 @@ import javax.persistence.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-//@Table (name = "mymovies")
-//@SecondaryTable(name = "ratings")
 
 public class Ratings {
 
