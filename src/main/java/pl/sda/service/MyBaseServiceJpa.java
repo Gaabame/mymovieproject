@@ -1,7 +1,7 @@
 package pl.sda.service;
 
 import pl.sda.entity.MovieJson;
-import pl.sda.repositoryBase.JpaMovieJsonRepo;
+import pl.sda.repositoryBase.MovieJsonRepoAPI;
 
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -13,7 +13,7 @@ public class MyBaseServiceJpa implements MyBaseService {
     public static final String MYMOVIES = "mymovies";
 
     EntityManagerFactory factory = Persistence.createEntityManagerFactory(MYMOVIES);
-    JpaMovieJsonRepo repo = new JpaMovieJsonRepo(factory, MovieJson.class);
+    MovieJsonRepoAPI repo = new MovieJsonRepoAPI(factory, MovieJson.class);
 
 
     @Override

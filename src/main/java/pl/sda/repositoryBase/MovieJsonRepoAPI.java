@@ -4,9 +4,9 @@ import javax.persistence.EntityManagerFactory;
 import java.util.Optional;
 
 
-public class JpaMovieJsonRepo extends JpaRepository<MovieJson, Long> implements MovieJsonRepo {
+public class MovieJsonRepoAPI extends JpaRepository<MovieJson, Long> implements MovieJsonRepo {
 
-    public JpaMovieJsonRepo(EntityManagerFactory factory, Class<MovieJson> entityClass) {
+    public MovieJsonRepoAPI(EntityManagerFactory factory, Class<MovieJson> entityClass) {
         super(factory, entityClass);
     }
 
