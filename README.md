@@ -1,1 +1,1 @@
-my first ever solo project before trying Spring:)
+my first ever solo project before trying Spring 😬😬😬
